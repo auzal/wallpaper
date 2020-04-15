@@ -258,7 +258,7 @@ class Stamp{
         this.hover = this.checkIsInsideNorm(x_sample, y_sample);
 
         //noFill();
-        ellipse(x,y,10,10);
+      //  ellipse(x,y,10,10);
         //  print(this.ang);
       }else{
         this.hover = false;
