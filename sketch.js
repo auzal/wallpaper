@@ -16,6 +16,8 @@ let render_ui = true;
 let last_action = 0;
 let ui_timeout = 4000;
 
+let shift_down = false
+
 function preload(){
   font = loadFont('assets/Roboto-Light.ttf');
   for(let i = 0 ; i < 6 ; i++){
@@ -43,6 +45,7 @@ function setup() {
 function draw() {
 
   background(panel.getColor());
+
   if(render_ui){
     t.render();
     t.update();
@@ -269,6 +272,15 @@ function dashedLine(l, dash_l){
 }
 
 function keyPressed(){
+  if(keyCode === SHIFT){
+    shift_down = true;
+  }
+}
+
+function keyReleased(){
+  if(keyCode === SHIFT){
+    shift_down = false;
+  }
 }
 
 

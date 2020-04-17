@@ -177,7 +177,13 @@ class Stamp{
     if(this.pressed){
       this.setPosition(x,y);
     }else if(this.size_handle.pressed){
-      this.resize(x,y);
+      if(shift_down){
+        let dx = x - px;
+        let dy = y - py;
+        this.resizeProportional(x,y);
+      }else{
+        this.resize(x,y);
+    }
     }else if(this.rotate_handle.pressed){
       this.rotate(x,y);
     }
@@ -207,6 +213,42 @@ class Stamp{
     }else{
       this.scale_y = -1;
     }
+  }
+
+  resizeProportional(x,y){
+    let original_dist = dist(this.x, this.y, this.x-this.original_w/2, this.y - this.original_h/2);
+    let dista = dist(this.x, this.y, x, y);
+
+    let mag =  dista / original_dist;
+
+    this.w = this.original_w * mag;
+    this.h = this.original_h * mag;
+
+    let ang_mouse = atan2(y-this.y, x-this.x);
+  //  let dist = dist(mouseX, mouseY, x, y);
+
+  let mx = this.x + cos(ang_mouse - this.ang) * dista;
+  let my = this.y + sin(ang_mouse - this.ang) * dista;
+
+    if(my > this.y){
+      this.h*=-1;
+    }
+
+    if(mx > this.x){
+      this.w*=-1;
+    }
+
+    if(this.w > 0){
+      this.scale_x = 1;
+    }else{
+      this.scale_x = -1;
+    }
+    if(this.h > 0){
+      this.scale_y = 1;
+    }else{
+      this.scale_y = -1;
+    }
+
   }
 
   setInTile(inside){
