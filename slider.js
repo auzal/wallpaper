@@ -101,9 +101,10 @@ class Panel{
     this.w = textWidth('descargar') + this.margin * 2;
     this.reset_w = textWidth('reset');
     this.download_w = textWidth('descargar');
+    this.about_w = textWidth('acerca de');
     print(this.w);
     pop();
-    this.h = 120;
+    this.h = 145;
     this.x = width - this.w;
     this.y = height/2 - this.h/2;
     this.r = new Slider(0,255);
@@ -123,10 +124,15 @@ class Panel{
     this.x_download = this.x + this.margin;
     this.y_download = this.y + 100;
 
+    this.x_about = this.x + this.margin;
+    this.y_about = this.y + 125;
+
     this.reset_hover = false;
     this.download_hover = false;
     this.reset_flag = false;
     this.download_flag = false;
+    this.about_hover = false;
+
   }
 
   update(){
@@ -159,13 +165,19 @@ class Panel{
       fill(154,	123,	32);
     }
     text("reset", this.x_reset, this.y_reset);
+
     fill(49,	158,	149);
     if(this.download_hover){
       fill(154,	123,	32);
     }
     text("descargar", this.x_download, this.y_download);
-    stroke(49,	158,	149);
-    noFill();
+
+    fill(49,	158,	149);
+    if(this.about_hover){
+      fill(154,	123,	32);
+    }
+    text("acerca de", this.x_about, this.y_about);
+
     //line();
     pop();
   }
@@ -181,6 +193,10 @@ class Panel{
 
     if(this.download_hover){
       this.download_flag = true;
+    }
+
+    if(this.about_hover){
+      window.open("https://auzal.net/");
     }
   }
 
@@ -219,6 +235,16 @@ class Panel{
       }
     }else{
       this.download_hover = false;
+    }
+
+    if(mouseX > this.x_about && mouseX < this.x_about + this.about_w){
+      if(mouseY > this.y_about && mouseY < this.y_about + this.font_size * 0.7){
+        this.about_hover = true;
+      }else{
+        this.about_hover = false;
+      }
+    }else{
+      this.about_hover = false;
     }
   }
 

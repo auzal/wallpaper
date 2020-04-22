@@ -208,10 +208,10 @@ function renderGrid(){
 function renderExportGrid(g){
   let x;
   let y;
-  for(let i = t.x ; i > 0 - t.w ; i-= t.w){
+  for(let i = g.width/2 ; i > 0 - t.w ; i-= t.w){
     x = i;
   }
-  for(let i = t.y ; i > 0 - t.h ; i-= t.h){
+  for(let i = g.height/2 ; i > 0 - t.h ; i-= t.h){
     y = i;
   }
 
@@ -289,6 +289,12 @@ function renderAndSave(){
   g.background(panel.getColor());
   renderExportGrid(g);
   save(g, 'pattern.png');
+
+
+  g = createGraphics(1440, 2560);
+  g.background(panel.getColor());
+  renderExportGrid(g);
+  save(g, 'pattern_vertical.png');
 
   g = createGraphics(t.w, t.h);
   g.background(panel.getColor());
